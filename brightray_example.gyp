@@ -11,8 +11,6 @@
       'browser/browser_main_parts.cc',
       'browser/browser_main_parts.h',
       'browser/browser_main_parts_mac.mm',
-      'browser/mac/bre_window_controller.h',
-      'browser/mac/bre_window_controller.mm',
       'common/main_delegate.cc',
       'common/main_delegate.h',
     ],
