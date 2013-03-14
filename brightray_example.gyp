@@ -13,6 +13,10 @@
       'browser/browser_main_parts_mac.mm',
       'common/main_delegate.cc',
       'common/main_delegate.h',
+      'renderer/render_view_observer.cc',
+      'renderer/render_view_observer.h',
+      'renderer/renderer_client.cc',
+      'renderer/renderer_client.h',
     ],
     'framework_sources': [
       'common/library_main.cc',

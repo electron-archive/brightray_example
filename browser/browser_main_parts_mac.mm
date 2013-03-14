@@ -29,7 +29,7 @@ void BrowserMainParts::PreMainMessageLoopRun() {
   [window makeFirstResponder:contentsView];
   [window makeKeyAndOrderFront:nil];
 
-  contents->GetWebContents()->GetController().LoadURL(GURL("http://dev.chromium.org/Home"), content::Referrer(), content::PAGE_TRANSITION_AUTO_TOPLEVEL, std::string());
+  contents->GetWebContents()->GetController().LoadURL(GURL("http://adam.roben.org/brightray_example/start.html"), content::Referrer(), content::PAGE_TRANSITION_AUTO_TOPLEVEL, std::string());
 }
 
 }
