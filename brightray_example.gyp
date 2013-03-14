@@ -116,6 +116,7 @@
           'mac_bundle': 1,
           'mac_bundle_resources': [
             'browser/mac/MainMenu.xib',
+            '<(libchromiumcontent_resources_dir)/content_shell.pak',
           ],
           'xcode_settings': {
             'LIBRARY_SEARCH_PATHS': '<(libchromiumcontent_library_dir)',
