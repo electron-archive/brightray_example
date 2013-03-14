@@ -1,6 +1,7 @@
 #import "browser/browser_main_parts.h"
 
 #import "brightray/browser/browser_context.h"
+#import "brightray/browser/default_web_contents_delegate.h"
 #import "brightray/browser/inspectable_web_contents.h"
 #import "brightray/browser/inspectable_web_contents_view.h"
 #import <AppKit/AppKit.h>
@@ -17,6 +18,8 @@ void BrowserMainParts::PreMainMessageLoopRun() {
 
   // FIXME: We're leaking this object (see #3).
   auto contents = brightray::InspectableWebContents::Create(content::WebContents::CreateParams(browser_context()));
+  // FIXME: And this one!
+  contents->GetWebContents()->SetDelegate(new brightray::DefaultWebContentsDelegate());
   auto contentsView = contents->GetView()->GetNativeView();
 
   contentsView.frame = [window.contentView bounds];
