@@ -15,7 +15,7 @@ v8::Handle<v8::Value> HelloWorld(v8::Local<v8::String> property, const v8::Acces
 }
 
 v8::Persistent<v8::ObjectTemplate> ConstructorTemplate() {
-  static auto constructor_template = []() {
+  static auto constructor_template = []() -> v8::Persistent<v8::ObjectTemplate> {
     auto constructor_template = v8::Persistent<v8::ObjectTemplate>::New(v8::Isolate::GetCurrent(), v8::ObjectTemplate::New());
     constructor_template->SetAccessor(v8::String::New("helloWorld"), HelloWorld);
     return constructor_template;
