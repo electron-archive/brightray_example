@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+S3_CREDENTIALS_FILE=/var/lib/jenkins/config/s3credentials
+
+cd "$(dirname "$0")/.."
+
+if [ ! -f "${S3_CREDENTIALS_FILE}" ]; then
+  echo >&2 "Error: Can't find ${S3_CREDENTIALS_FILE}"
+  exit 1
+fi
+
+. "${S3_CREDENTIALS_FILE}"
+
+script/bootstrap https://${JANKY_ARTIFACTS_S3_BUCKET}.s3.amazonaws.com/libchromiumcontent
+script/build
