@@ -5,6 +5,15 @@ This is an example app that uses
 
 ## Development
 
+### Prerequisites
+
+* Python 2.7
+* gyp
+* Mac:
+    * Xcode
+* Windows:
+    * Visual Studio 2010 SP1
+
 ### One-time setup
 
 You must previously have built and uploaded libchromiumcontent using its
