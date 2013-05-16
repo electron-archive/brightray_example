@@ -3,8 +3,10 @@
 
 extern "C" {
 
+#if defined(OS_MACOSX)
 __attribute__ ((visibility ("default")))
 int BrightrayExampleMain(int argc, const char* argv[]);
+#endif
 
 }
 

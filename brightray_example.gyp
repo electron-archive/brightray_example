@@ -36,9 +36,6 @@
       'sources': [
         '<@(app_sources)',
       ],
-      'include_dirs': [
-        '.',
-      ],
       'conditions': [
         ['OS=="mac"', {
           'product_name': '<(product_name)',
@@ -97,6 +94,15 @@
         '.',
         'vendor',
       ],
+      'direct_dependent_settings': {
+        'include_dirs': [
+          '.',
+          'vendor',
+        ],
+      },
+      'export_dependent_settings': [
+        'vendor/brightray/brightray.gyp:brightray',
+      ],
     },
   ],
   'conditions': [
@@ -111,11 +117,6 @@
           ],
           'sources': [
             '<@(framework_sources)',
-          ],
-          'include_dirs': [
-            '.',
-            'vendor',
-            '<(libchromiumcontent_include_dir)',
           ],
           'mac_bundle': 1,
           'mac_bundle_resources': [
