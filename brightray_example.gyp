@@ -4,6 +4,7 @@
     'product_name': 'Brightray Example',
     'app_sources': [
       'common/main.cc',
+      '<(libchromiumcontent_src_dir)/content/app/startup_helper_win.cc',
     ],
     'lib_sources': [
       'browser/browser_client.cc',
