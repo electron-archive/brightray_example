@@ -1,3 +1,3 @@
 [submodule "vendor/brightray"]
 	path = vendor/brightray
-	url = https://github.com/aroben/brightray
+	url = https://github.com/brightray/brightray
