@@ -92,12 +92,10 @@
       ],
       'include_dirs': [
         '.',
-        'vendor',
       ],
       'direct_dependent_settings': {
         'include_dirs': [
           '.',
-          'vendor',
         ],
       },
       'export_dependent_settings': [
@@ -140,6 +138,9 @@
               ],
             },
           ],
+          'export_dependent_settings': [
+            '<(project_name)_lib',
+          ],
         },
         {
           'target_name': '<(project_name)_helper',
@@ -150,9 +151,6 @@
           ],
           'sources': [
             '<@(app_sources)',
-          ],
-          'include_dirs': [
-            '.',
           ],
           'mac_bundle': 1,
           'xcode_settings': {
