@@ -11,9 +11,7 @@ public:
   ~BrowserMainParts();
 
 protected:
-#if defined(OS_MACOSX)
   virtual void PreMainMessageLoopRun() OVERRIDE;
-#endif
 
   DISALLOW_COPY_AND_ASSIGN(BrowserMainParts);
 };

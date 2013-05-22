@@ -10,7 +10,14 @@
       'browser/browser_client.h',
       'browser/browser_main_parts.cc',
       'browser/browser_main_parts.h',
-      'browser/browser_main_parts_mac.mm',
+      'browser/mac/window_controller.mm',
+      'browser/mac/window_controller.h',
+      'browser/mac/window_mac.h',
+      'browser/mac/window_mac.mm',
+      'browser/win/window_win.cc',
+      'browser/win/window_win.h',
+      'browser/window.cc',
+      'browser/window.h',
       'common/main_delegate.cc',
       'common/main_delegate.h',
       'renderer/render_view_observer.cc',
@@ -152,6 +159,7 @@
           'mac_bundle': 1,
           'mac_bundle_resources': [
             'browser/mac/MainMenu.xib',
+            'browser/mac/WindowController.xib',
             '<(libchromiumcontent_resources_dir)/content_shell.pak',
           ],
           'xcode_settings': {
