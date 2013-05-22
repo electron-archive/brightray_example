@@ -1,2 +1,13 @@
-/brightray_example.xcodeproj/
+/*.vcxproj*
+/*.xcodeproj/
 /build/
+
+# Visual Studio
+/*.opensdf
+/*.sdf
+/*.sln
+/*.suo
+/ipch/
+
+# Vim
+/*.swp

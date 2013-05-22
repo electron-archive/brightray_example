@@ -22,6 +22,13 @@
       'common/library_main.cc',
       'common/library_main.h',
     ],
+    'conditions': [
+      ['OS=="win"', {
+        'app_sources': [
+          '<(libchromiumcontent_src_dir)/content/app/startup_helper_win.cc',
+        ],
+      }],
+    ],
   },
   'includes': [
     'vendor/brightray/brightray.gypi',
@@ -35,9 +42,6 @@
       ],
       'sources': [
         '<@(app_sources)',
-      ],
-      'include_dirs': [
-        '.',
       ],
       'conditions': [
         ['OS=="mac"', {
@@ -82,6 +86,18 @@
             },
           ]
         }],
+        ['OS=="win"', {
+          'copies': [
+            {
+              'destination': '<(PRODUCT_DIR)',
+              'files': [
+                '<(libchromiumcontent_library_dir)/chromiumcontent.dll',
+                '<(libchromiumcontent_library_dir)/icudt.dll',
+                '<(libchromiumcontent_library_dir)/libGLESv2.dll',
+              ],
+            },
+          ],
+        }],
       ],
     },
     {
@@ -95,7 +111,28 @@
       ],
       'include_dirs': [
         '.',
-        'vendor',
+      ],
+      'direct_dependent_settings': {
+        'include_dirs': [
+          '.',
+        ],
+      },
+      'export_dependent_settings': [
+        'vendor/brightray/brightray.gyp:brightray',
+      ],
+      'conditions': [
+        ['OS!="mac"', {
+          'sources/': [
+            ['exclude', '/mac/'],
+            ['exclude', '_mac\.(mm|h)$'],
+          ],
+        }],
+        ['OS!="win"', {
+          'sources/': [
+            ['exclude', '/win/'],
+            ['exclude', '_win\.(cc|h)$'],
+          ],
+        }],
       ],
     },
   ],
@@ -111,11 +148,6 @@
           ],
           'sources': [
             '<@(framework_sources)',
-          ],
-          'include_dirs': [
-            '.',
-            'vendor',
-            '<(libchromiumcontent_include_dir)',
           ],
           'mac_bundle': 1,
           'mac_bundle_resources': [
@@ -139,6 +171,9 @@
               ],
             },
           ],
+          'export_dependent_settings': [
+            '<(project_name)_lib',
+          ],
         },
         {
           'target_name': '<(project_name)_helper',
@@ -149,9 +184,6 @@
           ],
           'sources': [
             '<@(app_sources)',
-          ],
-          'include_dirs': [
-            '.',
           ],
           'mac_bundle': 1,
           'xcode_settings': {
