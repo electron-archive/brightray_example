@@ -3,6 +3,8 @@
     'project_name': 'brightray_example',
     'product_name': 'Brightray Example',
     'app_sources': [
+      'app/win/brightray_example.rc',
+      'app/win/resource.h',
       'common/main.cc',
     ],
     'lib_sources': [
