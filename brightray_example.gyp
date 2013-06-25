@@ -181,6 +181,17 @@
               ],
             },
           ],
+          'postbuilds': [
+            {
+              'postbuild_name': 'Add symlinks for framework subdirectories',
+              'action': [
+                'tools/mac/create-framework-subdir-symlinks.sh',
+                '<(product_name)',
+                'Libraries',
+                'Frameworks',
+              ],
+            },
+          ],
           'export_dependent_settings': [
             '<(project_name)_lib',
           ],
