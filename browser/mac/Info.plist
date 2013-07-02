@@ -10,5 +10,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>BRYApplication</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
 </dict>
 </plist>

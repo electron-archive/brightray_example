@@ -8,5 +8,7 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
 </dict>
 </plist>
