@@ -8,7 +8,6 @@ This is an example app that uses
 ### Prerequisites
 
 * Python 2.7
-* gyp
 * Mac:
     * Xcode
 * Windows:
