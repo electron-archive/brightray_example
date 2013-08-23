@@ -14,14 +14,17 @@ v8::Handle<v8::Value> HelloWorld(v8::Local<v8::String> property, const v8::Acces
   return v8::String::New(base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str());
 }
 
-v8::Persistent<v8::ObjectTemplate> ConstructorTemplate() {
-  static auto constructor_template = []() -> v8::Persistent<v8::ObjectTemplate> {
-    auto constructor_template = v8::Persistent<v8::ObjectTemplate>::New(v8::Isolate::GetCurrent(), v8::ObjectTemplate::New());
-    constructor_template->SetAccessor(v8::String::New("helloWorld"), HelloWorld);
-    return constructor_template;
-  }();
-
+v8::Local<v8::ObjectTemplate> CreateConstructorTemplate() {
+  auto constructor_template = v8::ObjectTemplate::New();
+  constructor_template->SetAccessor(v8::String::New("helloWorld"), HelloWorld);
   return constructor_template;
+}
+
+
+v8::Local<v8::ObjectTemplate> ConstructorTemplate() {
+  auto isolate = v8::Isolate::GetCurrent();
+  static v8::Persistent<v8::ObjectTemplate> constructor_template(isolate, CreateConstructorTemplate());
+  return v8::Local<v8::ObjectTemplate>::New(isolate, constructor_template);
 }
 
 }
