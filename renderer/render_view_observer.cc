@@ -1,7 +1,7 @@
 #include "renderer/render_view_observer.h"
 
-#include "base/stringprintf.h"
-#include "base/string_util.h"
+#include "base/strings/stringprintf.h"
+#include "base/strings/string_util.h"
 #include "third_party/WebKit/public/web/WebDocument.h"
 #include "third_party/WebKit/public/web/WebFrame.h"
 #include "v8/include/v8.h"
