@@ -10,8 +10,8 @@ namespace brightray_example {
 
 namespace {
 
-v8::Handle<v8::Value> HelloWorld(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
-  return v8::String::New(base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str());
+void HelloWorld(v8::Local<v8::String> property, const v8::PropertyCallbackInfo<v8::Value>& info) {
+  info.GetReturnValue().Set(v8::String::New(base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str()));
 }
 
 v8::Local<v8::ObjectTemplate> CreateConstructorTemplate() {
