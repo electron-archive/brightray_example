@@ -1,7 +1,7 @@
 #include "renderer/render_view_observer.h"
 
-#include "base/stringprintf.h"
-#include "base/string_util.h"
+#include "base/strings/stringprintf.h"
+#include "base/strings/string_util.h"
 #include "third_party/WebKit/public/web/WebDocument.h"
 #include "third_party/WebKit/public/web/WebFrame.h"
 #include "v8/include/v8.h"
@@ -10,8 +10,8 @@ namespace brightray_example {
 
 namespace {
 
-v8::Handle<v8::Value> HelloWorld(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
-  return v8::String::New(base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str());
+void HelloWorld(v8::Local<v8::String> property, const v8::PropertyCallbackInfo<v8::Value>& info) {
+  info.GetReturnValue().Set(v8::String::New(base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str()));
 }
 
 v8::Local<v8::ObjectTemplate> CreateConstructorTemplate() {
