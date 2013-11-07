@@ -18,6 +18,9 @@
       'browser/mac/window_mac.mm',
       'browser/win/window_win.cc',
       'browser/win/window_win.h',
+      'browser/linux/window_linux.cc',
+      'browser/linux/window_linux.h',
+      'browser/linux/application_info_linux.cc',
       'browser/window.cc',
       'browser/window.h',
       'common/main_delegate.cc',
@@ -130,6 +133,19 @@
         'vendor/brightray/brightray.gyp:brightray',
       ],
       'conditions': [
+        ['OS=="linux"', {
+          'sources': [
+            '<@(framework_sources)',
+          ],
+          'cflags': [
+            "-fno-rtti",
+          ],
+        }, {
+          'sources/': [
+            ['exclude', '/linux/'],
+            ['exclude', '_linux\.(cc|h)$'],
+          ],
+        }],
         ['OS!="mac"', {
           'sources/': [
             ['exclude', '/mac/'],

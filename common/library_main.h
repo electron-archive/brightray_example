@@ -5,7 +5,7 @@
 
 extern "C" {
 
-#if defined(OS_MACOSX)
+#if defined(OS_MACOSX) || defined(OS_LINUX)
 __attribute__ ((visibility ("default")))
 int BrightrayExampleMain(int argc, const char* argv[]);
 #endif
