@@ -16,10 +16,17 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, wchar_t*, int) {
   return content::ContentMain(instance, &sandbox_info, &delegate);
 }
 
-#else
+#elif defined(OS_MACOSX)
 
 int main(int argc, const char* argv[]) {
   return BrightrayExampleMain(argc, argv);
+}
+
+#else // OS_LINUX
+
+int main(int argc, const char* argv[]) {
+  brightray_example::MainDelegate delegate;
+  return content::ContentMain(argc, argv, &delegate);
 }
 
 #endif

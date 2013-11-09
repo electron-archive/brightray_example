@@ -134,9 +134,6 @@
       ],
       'conditions': [
         ['OS=="linux"', {
-          'sources': [
-            '<@(framework_sources)',
-          ],
           'cflags': [
             "-fno-rtti",
             "<!@(pkg-config --cflags gtk+-2.0)",
