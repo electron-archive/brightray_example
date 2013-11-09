@@ -16,10 +16,7 @@ def main():
 
 
 def run_gyp():
-    if sys.platform == 'linux2':
-        subprocess.check_call(['gyp', '--depth', '.', 'brightray_example.gyp'])
-    else:
-        subprocess.check_call([sys.executable, GYP, '--depth', '.', 'brightray_example.gyp'])
+    subprocess.check_call([sys.executable, GYP, '--depth', '.', 'brightray_example.gyp'])
 
 
 def build():
