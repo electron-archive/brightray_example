@@ -13,8 +13,8 @@ VENDOR_DIR = os.path.join(SOURCE_ROOT, 'vendor')
 
 def main():
     args = parse_args()
-    return (update_submodules() or
-            bootstrap_brightray(args.url))
+    update_submodules()
+    bootstrap_brightray(args.url)
 
 
 def parse_args():
@@ -29,16 +29,16 @@ def update_submodules():
     cwd = os.getcwd()
     os.chdir(SOURCE_ROOT)
     try:
-        return (subprocess.call(['git', 'submodule', 'sync', '--quiet']) or
-                subprocess.call(['git', 'submodule', 'update', '--init',
-                                 '--recursive']))
+        subprocess.check_call(['git', 'submodule', 'sync', '--quiet'])
+        subprocess.check_call(['git', 'submodule', 'update', '--init',
+                               '--recursive'])
     finally:
         os.chdir(cwd)
 
 
 def bootstrap_brightray(url):
     bootstrap = os.path.join(VENDOR_DIR, 'brightray', 'script', 'bootstrap')
-    return subprocess.call([sys.executable, bootstrap, url])
+    subprocess.check_call([sys.executable, bootstrap, url])
 
 
 if __name__ == '__main__':
