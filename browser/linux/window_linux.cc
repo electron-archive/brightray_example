@@ -25,7 +25,7 @@ WindowLinux::WindowLinux(brightray::BrowserContext* browser_context)
 
   // Make the window 70% the width and height of the default screen.
   GdkScreen *screen = gdk_screen_get_default();
-  gtk_widget_set_usize(window_,
+  gtk_window_set_default_size(GTK_WINDOW(window_),
     gdk_screen_get_width(screen) * 7 / 10,
     gdk_screen_get_height(screen) * 7 / 10);
 
