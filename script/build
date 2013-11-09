@@ -6,30 +6,33 @@ import sys
 
 
 SOURCE_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-GYP = {
-    'win32': 'gyp.bat',
-}.get(sys.platform, 'gyp')
+GYP = os.path.join(SOURCE_ROOT, 'vendor', 'brightray', 'vendor', 'gyp', 'gyp_main.py')
 
 
 def main():
     os.chdir(SOURCE_ROOT)
-    return (run_gyp() or
-            build())
+    run_gyp()
+    build()
 
 
 def run_gyp():
-    return subprocess.call([GYP, '--depth', '.', 'brightray_example.gyp'])
+    if sys.platform == 'linux2':
+        subprocess.check_call(['gyp', '--depth', '.', 'brightray_example.gyp'])
+    else:
+        subprocess.check_call([sys.executable, GYP, '--depth', '.', 'brightray_example.gyp'])
 
 
 def build():
     if sys.platform == 'darwin':
-        return subprocess.call(['xcodebuild'])
+        subprocess.check_call(['xcodebuild'])
+        return
     if sys.platform == 'linux2':
-        return subprocess.call(['make'])
+        subprocess.check_call(['make', '-j4'])
+        return
 
     assert sys.platform == 'win32', sys.platform
     msbuild = os.path.join(os.environ['windir'], 'Microsoft.NET', 'Framework', 'v4.0.30319', 'MSBuild.exe')
-    return subprocess.call([msbuild, 'brightray_example.sln'])
+    subprocess.check_call([msbuild, 'brightray_example.sln'])
 
 
 if __name__ == '__main__':
