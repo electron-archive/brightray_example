@@ -3,6 +3,7 @@
 import os
 import subprocess
 import sys
+import multiprocessing
 
 
 SOURCE_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -24,7 +25,7 @@ def build():
         subprocess.check_call(['xcodebuild'])
         return
     if sys.platform == 'linux2':
-        subprocess.check_call(['make', '-j4'])
+        subprocess.check_call(['make', '-j%d' % multiprocessing.cpu_count()])
         return
 
     assert sys.platform == 'win32', sys.platform
