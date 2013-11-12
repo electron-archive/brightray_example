@@ -110,6 +110,26 @@
             },
           ],
         }],
+        ['OS=="linux"', {
+          'actions': [
+            {
+              # Copy the chrome sandbox.  We would use the 'copies'
+              # mechanism, but we need to rename and chmod it.
+              'action_name': 'Copy chrome sandbox',
+              'inputs': [
+                '<(libchromiumcontent_library_dir)/chrome_sandbox',
+              ],
+              'outputs': [
+                '<(PRODUCT_DIR)/chrome-sandbox',
+              ],
+              'action': [
+                'tools/linux/copy-chrome-sandbox.sh',
+                '<(libchromiumcontent_library_dir)/chrome_sandbox',
+                '<(PRODUCT_DIR)/chrome-sandbox',
+              ],
+            },
+          ]
+        }],
       ],
     },
     {
