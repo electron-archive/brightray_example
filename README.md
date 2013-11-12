@@ -12,8 +12,6 @@ This is an example app that uses
     * Xcode
 * Windows:
     * Visual Studio 2010 SP1
-* Linux:
-    * gyp
 
 ### One-time setup
 
@@ -27,6 +25,18 @@ You must previously have built and uploaded libchromiumcontent using its
     $ script/build
 
 This will build the app into the `build` directory.
+
+### Running
+
+Run `out/Debug/brightray_example`
+
+On Linux, you need to copy the Chrome SUID sandbox or explicitly run
+without it.  Any of these three choices should work:
+
+* Run `tools/linux/copy-chrome-sandbox.sh` to install the sandbox.  The
+  script must be run as root.
+* `CHROME_DEVEL_SANDBOX=/usr/lib/chromium-browser/chrome-sandbox out/Debug/brightray_example`
+* `out/Debug/brightray_example --disable-setuid-sandbox`
 
 ## License
 

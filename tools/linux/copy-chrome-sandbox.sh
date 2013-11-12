@@ -1,25 +1,19 @@
 #!/bin/bash
 
-if [ $# != 2 ]; then
-  echo "Usage:"
-  echo "  $0 src-file dest-file"
-  exit 1
+ROOT=$(dirname $(dirname $(dirname $0) ) )
+SRC=$ROOT/vendor/brightray/vendor/download/libchromiumcontent/Release/chrome_sandbox
+DST=$ROOT/out/Debug/chrome-sandbox
+
+if [ $EUID != 0 ]; then
+  echo You must be root to run this script.
+	exit 1
 fi
 
-rm -f "$2"                    &&
-  cp "$1" "$2"                &&
-  sudo chown root.root "$2"   &&
-  sudo chmod 4755 "$2"        || (
-  cat <<EOF
-
-------------------------------------------------------------------------
-The chrome sandbox must be root-owned and setuid.  This script failed to
-make it so.  You might be able to run brightray_example with the
---disable-setuid-sandbox flag, or set
-CHROME_DEVEL_SANDBOX=/usr/lib/chromium-browser/chrome-sandbox before
-running it.
-------------------------------------------------------------------------
-
-EOF
-exit 1
+rm -f "$DST"               &&
+  cp "$SRC" "$DST"         &&
+  chown root.root "$DST"   &&
+  chmod 4755 "$DST"        || (
+  echo Could not copy "$SRC" to "$DST" setuid.
+  rm -f "$DST"
+  exit 1
 )
