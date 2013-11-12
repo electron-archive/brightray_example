@@ -133,11 +133,7 @@
         'vendor/brightray/brightray.gyp:brightray',
       ],
       'conditions': [
-        ['OS=="linux"', {
-          'cflags': [
-            "<!@(pkg-config --cflags gtk+-2.0)",
-          ],
-        }, {
+        ['OS!="linux"', {
           'sources/': [
             ['exclude', '/linux/'],
             ['exclude', '_linux\.(cc|h)$'],
