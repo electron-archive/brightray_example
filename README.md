@@ -35,8 +35,8 @@ without it.  Any of these three choices should work:
 
 * Run `tools/linux/copy-chrome-sandbox.sh` to install the sandbox.  The
   script must be run as root.
-* `CHROME_DEVEL_SANDBOX=/usr/lib/chromium-browser/chrome-sandbox out/Debug/brightray_example`
-* `out/Debug/brightray_example --disable-setuid-sandbox`
+* Use the sandbox from an existing installed Chrome: `CHROME_DEVEL_SANDBOX=/usr/lib/chromium-browser/chrome-sandbox out/Debug/brightray_example`
+* Use no sandbox: `out/Debug/brightray_example --disable-setuid-sandbox`
 
 ## License
 
