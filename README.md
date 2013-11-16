@@ -30,7 +30,10 @@ This will build the app into the `build` directory.
 
 Run `out/Debug/brightray_example`
 
-On Linux, you need to copy the Chrome SUID sandbox or explicitly run
+On Linux, you'll need libchromiumcontent.so in your library path.  Run
+this first: `export LD_LIBRARY_PATH=$PWD/vendor/brightray/vendor/download/libchromiumcontent/Release`
+
+On Linux, you'll also need to copy the Chrome SUID sandbox or explicitly run
 without it.  Any of these three choices should work:
 
 * Run `tools/linux/copy-chrome-sandbox.sh` to install the sandbox.  The
