@@ -9,5 +9,11 @@
 /*.suo
 /ipch/
 
+# Linux
+Makefile
+*.Makefile
+*.mk
+out/
+
 # Vim
 /*.swp
