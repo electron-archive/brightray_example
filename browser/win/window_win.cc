@@ -4,7 +4,7 @@
 #include "brightray/browser/inspectable_web_contents_view.h"
 
 #include "base/win/wrapped_window_proc.h"
-#include "ui/base/win/hwnd_util.h"
+#include "ui/gfx/win/hwnd_util.h"
 
 namespace brightray_example {
 
@@ -28,7 +28,7 @@ WindowWin::WindowWin(brightray::BrowserContext* browser_context)
                          WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
                          CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
                          nullptr, nullptr, instance_handle_, nullptr);
-  ui::SetWindowUserData(window_, this);
+  gfx::SetWindowUserData(window_, this);
 
   auto view = inspectable_web_contents()->GetView()->GetNativeView();
   SetParent(view, window_);
@@ -63,7 +63,7 @@ void WindowWin::RegisterWindowClass() {
 }
 
 LRESULT WindowWin::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
-  WindowWin* window = static_cast<WindowWin*>(ui::GetWindowUserData(hwnd));
+  WindowWin* window = static_cast<WindowWin*>(gfx::GetWindowUserData(hwnd));
 
   switch (message) {
     case WM_SIZE:
