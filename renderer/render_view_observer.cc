@@ -43,7 +43,7 @@ void RenderViewObserver::DidClearWindowObject(WebKit::WebFrame* frame) {
       !StartsWithASCII(url.path(), "/brightray_example/", true))
     return;
 
-  v8::HandleScope scope;
+  v8::HandleScope scope(v8::Isolate::GetCurrent());
 
   auto context = frame->mainWorldScriptContext();
   v8::Context::Scope contextScope(context);
