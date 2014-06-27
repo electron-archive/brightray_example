@@ -11,12 +11,12 @@ namespace brightray_example {
 namespace {
 
 void HelloWorld(v8::Local<v8::String> property, const v8::PropertyCallbackInfo<v8::Value>& info) {
-  info.GetReturnValue().Set(v8::String::New(base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str()));
+  info.GetReturnValue().Set(v8::String::NewFromUtf8(v8::Isolate::GetCurrent(), base::StringPrintf("Hello, World from %s:%d!", __FILE__, __LINE__).c_str()));
 }
 
 v8::Local<v8::ObjectTemplate> CreateConstructorTemplate() {
   auto constructor_template = v8::ObjectTemplate::New();
-  constructor_template->SetAccessor(v8::String::New("helloWorld"), HelloWorld);
+  constructor_template->SetAccessor(v8::String::NewFromUtf8(v8::Isolate::GetCurrent(), "helloWorld"), HelloWorld);
   return constructor_template;
 }
 
@@ -48,7 +48,7 @@ void RenderViewObserver::DidClearWindowObject(WebKit::WebFrame* frame) {
   auto context = frame->mainWorldScriptContext();
   v8::Context::Scope contextScope(context);
 
-  context->Global()->Set(v8::String::New("brightray_example"), ConstructorTemplate()->NewInstance());
+  context->Global()->Set(v8::String::NewFromUtf8(v8::Isolate::GetCurrent(), "brightray_example"), ConstructorTemplate()->NewInstance());
 }
 
 }
