@@ -104,7 +104,7 @@
               'destination': '<(PRODUCT_DIR)',
               'files': [
                 '<(libchromiumcontent_library_dir)/chromiumcontent.dll',
-                '<(libchromiumcontent_library_dir)/icudt.dll',
+                '<(libchromiumcontent_library_dir)/icudtl.dat',
                 '<(libchromiumcontent_library_dir)/libGLESv2.dll',
               ],
             },
