@@ -172,6 +172,7 @@
             'browser/mac/MainMenu.xib',
             'browser/mac/WindowController.xib',
             '<(libchromiumcontent_resources_dir)/content_shell.pak',
+            '<(libchromiumcontent_resources_dir)/icudtl.dat',
           ],
           'xcode_settings': {
             'LIBRARY_SEARCH_PATHS': '<(libchromiumcontent_library_dir)',
