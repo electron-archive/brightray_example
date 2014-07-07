@@ -2,7 +2,10 @@
 #define BRIGHTRAY_EXAMPLE_BROWSER_WIN_WINDOW_WIN_H_
 
 #include "browser/window.h"
-#include <Windows.h>
+
+namespace views {
+class Widget;
+}
 
 namespace brightray_example {
 
@@ -14,13 +17,7 @@ class WindowWin : public Window {
   virtual void Show() OVERRIDE;
 
  private:
-  static HINSTANCE instance_handle_;
-  static void RegisterWindowClass();
-  static LRESULT CALLBACK WndProc(HWND, UINT message, WPARAM, LPARAM);
-
-  void ResizeWebContents();
-
-  HWND window_;
+  views::Widget* widget_;
 
   DISALLOW_COPY_AND_ASSIGN(WindowWin);
 };

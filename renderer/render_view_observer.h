@@ -11,7 +11,7 @@ public:
 private:
   ~RenderViewObserver();
 
-  virtual void DidClearWindowObject(WebKit::WebFrame*) OVERRIDE;
+  virtual void DidClearWindowObject(blink::WebFrame*, int world_id) OVERRIDE;
 };
 
 }

@@ -13,7 +13,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, wchar_t*, int) {
   sandbox::SandboxInterfaceInfo sandbox_info = {0};
   content::InitializeSandboxInfo(&sandbox_info);
   brightray_example::MainDelegate delegate;
-  return content::ContentMain(instance, &sandbox_info, &delegate);
+
+  content::ContentMainParams params(&delegate);
+  params.instance = instance;
+  params.sandbox_info = &sandbox_info;
+  return content::ContentMain(params);
 }
 
 #elif defined(OS_MACOSX)
@@ -26,7 +30,10 @@ int main(int argc, const char* argv[]) {
 
 int main(int argc, const char* argv[]) {
   brightray_example::MainDelegate delegate;
-  return content::ContentMain(argc, argv, &delegate);
+  content::ContentMainParams params(&delegate);
+  params.argc = argc;
+  params.argv = argv;
+  return content::ContentMain(params);
 }
 
 #endif

@@ -1,38 +1,59 @@
 #include "browser/win/window_win.h"
 
 #include "brightray/browser/inspectable_web_contents.h"
-#include "brightray/browser/inspectable_web_contents_view.h"
+#include "brightray/browser/win/inspectable_web_contents_view_win.h"
 
-#include "base/win/wrapped_window_proc.h"
-#include "ui/gfx/win/hwnd_util.h"
+#include "ui/views/layout/fill_layout.h"
+#include "ui/views/widget/desktop_aura/desktop_native_widget_aura.h"
+#include "ui/views/widget/widget.h"
+#include "ui/views/widget/widget_delegate.h"
 
 namespace brightray_example {
 
 namespace {
 
-const wchar_t kClassName[] = L"Brightray Example";
+class WidgetDelegateView : public views::WidgetDelegateView {
+ public:
+  WidgetDelegateView(scoped_ptr<WindowWin> window)
+      : window_(window.Pass()) {
+    SetLayoutManager(new views::FillLayout);
+  }
+  ~WidgetDelegateView() {
+  }
+
+  virtual void DeleteDelegate() OVERRIDE { delete this; }
+  virtual views::View* GetContentsView() OVERRIDE { return this; }
+  virtual bool CanResize() const OVERRIDE { return true; }
+  virtual bool CanMaximize() const OVERRIDE { return true; }
+  virtual base::string16 GetWindowTitle() const OVERRIDE { return L"Brightray Example";  }
+  virtual gfx::Size GetPreferredSize() OVERRIDE { return gfx::Size(800, 600); }
+  virtual gfx::Size GetMinimumSize() OVERRIDE { return gfx::Size(100, 100); }
+
+ private:
+  scoped_ptr<WindowWin> window_;
+
+  DISALLOW_COPY_AND_ASSIGN(WidgetDelegateView);
+};
 
 }
-
-HINSTANCE WindowWin::instance_handle_ = nullptr;
 
 Window* Window::Create(brightray::BrowserContext* browser_context) {
   return new WindowWin(browser_context);
 }
 
 WindowWin::WindowWin(brightray::BrowserContext* browser_context)
-    : Window(browser_context) {
-  RegisterWindowClass();
+    : Window(browser_context),
+      widget_(new views::Widget) {
+  auto delegate_view = new WidgetDelegateView(make_scoped_ptr(this).Pass());
 
-  window_ = CreateWindow(kClassName, L"Brightray Example",
-                         WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
-                         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-                         nullptr, nullptr, instance_handle_, nullptr);
-  gfx::SetWindowUserData(window_, this);
-
-  auto view = inspectable_web_contents()->GetView()->GetNativeView();
-  SetParent(view, window_);
-  ResizeWebContents();
+  views::Widget::InitParams params;
+  params.top_level = true;
+  params.native_widget = new views::DesktopNativeWidgetAura(widget_);
+  params.delegate = delegate_view;
+  widget_->Init(params);
+  auto contents_view = static_cast<brightray::InspectableWebContentsViewWin*>(inspectable_web_contents()->GetView());
+  delegate_view->AddChildView(contents_view->GetView());
+  delegate_view->Layout();
   WindowReady();
 }
 
@@ -40,49 +61,7 @@ WindowWin::~WindowWin() {
 }
 
 void WindowWin::Show() {
-  ShowWindow(window_, SW_SHOWNORMAL);
-}
-
-void WindowWin::RegisterWindowClass() {
-  static bool registered;
-  if (registered)
-    return;
-  registered = true;
-
-  WNDCLASSEX wndclass;
-  base::win::InitializeWindowClass(
-      kClassName, &WindowWin::WndProc,
-      CS_HREDRAW | CS_VREDRAW,
-      0, 0,
-      LoadCursor(nullptr, IDC_ARROW), nullptr,
-      nullptr,
-      nullptr, nullptr,
-      &wndclass);
-  instance_handle_ = wndclass.hInstance;
-  RegisterClassEx(&wndclass);
-}
-
-LRESULT WindowWin::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
-  WindowWin* window = static_cast<WindowWin*>(gfx::GetWindowUserData(hwnd));
-
-  switch (message) {
-    case WM_SIZE:
-      window->ResizeWebContents();
-      return 0;
-    case WM_DESTROY:
-      delete window;
-      PostQuitMessage(0);
-      return 0;
-  }
-
-  return DefWindowProc(hwnd, message, wParam, lParam);
-}
-
-void WindowWin::ResizeWebContents() {
-  RECT client_rect;
-  GetClientRect(window_, &client_rect);
-  auto view = inspectable_web_contents()->GetView()->GetNativeView();
-  SetWindowPos(view, nullptr, client_rect.left, client_rect.top, client_rect.right - client_rect.left, client_rect.bottom - client_rect.top, SWP_NOZORDER);
+  widget_->Show();
 }
 
 }
