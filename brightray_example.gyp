@@ -16,10 +16,8 @@
       'browser/mac/window_controller.h',
       'browser/mac/window_mac.h',
       'browser/mac/window_mac.mm',
-      'browser/win/window_win.cc',
-      'browser/win/window_win.h',
-      'browser/linux/window_linux.cc',
-      'browser/linux/window_linux.h',
+      'browser/views/window_views.cc',
+      'browser/views/window_views.h',
       'browser/linux/application_info_linux.cc',
       'browser/window.cc',
       'browser/window.h',
@@ -144,6 +142,11 @@
           'sources/': [
             ['exclude', '/mac/'],
             ['exclude', '_mac\.(mm|h)$'],
+          ],
+        },{
+          'sources/': [
+            ['exclude', '/views/'],
+            ['exclude', '_views\.(cc|h)$'],
           ],
         }],
         ['OS!="win"', {

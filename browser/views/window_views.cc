@@ -1,4 +1,4 @@
-#include "browser/win/window_win.h"
+#include "browser/views/window_views.h"
 
 #include "brightray/browser/inspectable_web_contents.h"
 #include "brightray/browser/inspectable_web_contents_view.h"
@@ -13,7 +13,7 @@ namespace {
 
 class WidgetDelegateView : public views::WidgetDelegateView {
  public:
-  WidgetDelegateView(scoped_ptr<WindowWin> window)
+  WidgetDelegateView(scoped_ptr<WindowViews> window)
       : window_(window.Pass()) {
     SetLayoutManager(new views::FillLayout);
   }
@@ -29,7 +29,7 @@ class WidgetDelegateView : public views::WidgetDelegateView {
   virtual gfx::Size GetMinimumSize() OVERRIDE { return gfx::Size(100, 100); }
 
  private:
-  scoped_ptr<WindowWin> window_;
+  scoped_ptr<WindowViews> window_;
 
   DISALLOW_COPY_AND_ASSIGN(WidgetDelegateView);
 };
@@ -37,10 +37,10 @@ class WidgetDelegateView : public views::WidgetDelegateView {
 }
 
 Window* Window::Create(brightray::BrowserContext* browser_context) {
-  return new WindowWin(browser_context);
+  return new WindowViews(browser_context);
 }
 
-WindowWin::WindowWin(brightray::BrowserContext* browser_context)
+WindowViews::WindowViews(brightray::BrowserContext* browser_context)
     : Window(browser_context),
       widget_(new views::Widget) {
   auto delegate_view = new WidgetDelegateView(make_scoped_ptr(this).Pass());
@@ -54,10 +54,10 @@ WindowWin::WindowWin(brightray::BrowserContext* browser_context)
   WindowReady();
 }
 
-WindowWin::~WindowWin() {
+WindowViews::~WindowViews() {
 }
 
-void WindowWin::Show() {
+void WindowViews::Show() {
   widget_->Show();
 }
 
