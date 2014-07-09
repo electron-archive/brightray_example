@@ -1,10 +1,9 @@
 #include "browser/win/window_win.h"
 
 #include "brightray/browser/inspectable_web_contents.h"
-#include "brightray/browser/win/inspectable_web_contents_view_win.h"
+#include "brightray/browser/inspectable_web_contents_view.h"
 
 #include "ui/views/layout/fill_layout.h"
-#include "ui/views/widget/desktop_aura/desktop_native_widget_aura.h"
 #include "ui/views/widget/widget.h"
 #include "ui/views/widget/widget_delegate.h"
 
@@ -48,11 +47,9 @@ WindowWin::WindowWin(brightray::BrowserContext* browser_context)
 
   views::Widget::InitParams params;
   params.top_level = true;
-  params.native_widget = new views::DesktopNativeWidgetAura(widget_);
   params.delegate = delegate_view;
   widget_->Init(params);
-  auto contents_view = static_cast<brightray::InspectableWebContentsViewWin*>(inspectable_web_contents()->GetView());
-  delegate_view->AddChildView(contents_view->GetView());
+  delegate_view->AddChildView(inspectable_web_contents()->GetView()->GetView());
   delegate_view->Layout();
   WindowReady();
 }
