@@ -7,6 +7,8 @@
 #include "ui/views/widget/widget.h"
 #include "ui/views/widget/widget_delegate.h"
 
+#include "base/strings/utf_string_conversions.h"
+
 namespace brightray_example {
 
 namespace {
@@ -24,7 +26,9 @@ class WidgetDelegateView : public views::WidgetDelegateView {
   virtual views::View* GetContentsView() OVERRIDE { return this; }
   virtual bool CanResize() const OVERRIDE { return true; }
   virtual bool CanMaximize() const OVERRIDE { return true; }
-  virtual base::string16 GetWindowTitle() const OVERRIDE { return L"Brightray Example";  }
+  virtual base::string16 GetWindowTitle() const OVERRIDE { 
+    return base::ASCIIToUTF16("Brightray Example");  
+  }
   virtual gfx::Size GetPreferredSize() OVERRIDE { return gfx::Size(800, 600); }
   virtual gfx::Size GetMinimumSize() OVERRIDE { return gfx::Size(100, 100); }
 
