@@ -3,7 +3,7 @@
 #include "base/strings/stringprintf.h"
 #include "base/strings/string_util.h"
 #include "third_party/WebKit/public/web/WebDocument.h"
-#include "third_party/WebKit/public/web/WebFrame.h"
+#include "third_party/WebKit/public/web/WebLocalFrame.h"
 #include "v8/include/v8.h"
 
 namespace brightray_example {
@@ -36,7 +36,7 @@ RenderViewObserver::RenderViewObserver(content::RenderView *render_view)
 RenderViewObserver::~RenderViewObserver() {
 }
 
-void RenderViewObserver::DidClearWindowObject(blink::WebFrame* frame, int world_id) {
+void RenderViewObserver::DidClearWindowObject(blink::WebLocalFrame* frame, int world_id) {
   // Only inject into the main world.
   if (world_id != 0)
     return;

@@ -3,7 +3,6 @@
 #include "brightray/browser/browser_context.h"
 #include "brightray/browser/default_web_contents_delegate.h"
 #include "brightray/browser/inspectable_web_contents.h"
-#include "content/public/browser/web_contents_view.h"
 
 namespace brightray_example {
 
@@ -21,7 +20,7 @@ Window::~Window() {
 void Window::WindowReady() {
   auto web_contents = inspectable_web_contents_->GetWebContents();
   web_contents->GetController().LoadURL(GURL("http://adam.roben.org/brightray_example/start.html"), content::Referrer(), content::PAGE_TRANSITION_AUTO_TOPLEVEL, std::string());
-  web_contents->GetView()->SetInitialFocus();
+  web_contents->SetInitialFocus();
 }
 
 }
