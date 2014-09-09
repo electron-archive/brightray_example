@@ -26,11 +26,11 @@ class WidgetDelegateView : public views::WidgetDelegateView {
   virtual views::View* GetContentsView() OVERRIDE { return this; }
   virtual bool CanResize() const OVERRIDE { return true; }
   virtual bool CanMaximize() const OVERRIDE { return true; }
-  virtual base::string16 GetWindowTitle() const OVERRIDE { 
-    return base::ASCIIToUTF16("Brightray Example");  
+  virtual base::string16 GetWindowTitle() const OVERRIDE {
+    return base::ASCIIToUTF16("Brightray Example");
   }
-  virtual gfx::Size GetPreferredSize() OVERRIDE { return gfx::Size(800, 600); }
-  virtual gfx::Size GetMinimumSize() OVERRIDE { return gfx::Size(100, 100); }
+  virtual gfx::Size GetPreferredSize() const OVERRIDE { return gfx::Size(800, 600); }
+  virtual gfx::Size GetMinimumSize() const OVERRIDE { return gfx::Size(100, 100); }
 
  private:
   scoped_ptr<WindowViews> window_;
@@ -50,7 +50,6 @@ WindowViews::WindowViews(brightray::BrowserContext* browser_context)
   auto delegate_view = new WidgetDelegateView(make_scoped_ptr(this).Pass());
 
   views::Widget::InitParams params;
-  params.top_level = true;
   params.delegate = delegate_view;
   widget_->Init(params);
   delegate_view->AddChildView(inspectable_web_contents()->GetView()->GetView());

@@ -36,11 +36,7 @@ RenderViewObserver::RenderViewObserver(content::RenderView *render_view)
 RenderViewObserver::~RenderViewObserver() {
 }
 
-void RenderViewObserver::DidClearWindowObject(blink::WebLocalFrame* frame, int world_id) {
-  // Only inject into the main world.
-  if (world_id != 0)
-    return;
-
+void RenderViewObserver::DidClearWindowObject(blink::WebLocalFrame* frame) {
   GURL url = frame->document().url();
   if (!url.SchemeIs("http") ||
       !url.DomainIs("adam.roben.org") ||
