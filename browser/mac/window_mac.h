@@ -12,7 +12,7 @@ class WindowMac : public Window {
   WindowMac(brightray::BrowserContext*, WindowController*);
   ~WindowMac();
 
-  virtual void Show() OVERRIDE;
+  void Show() override;
 
  private:
   // Owns us.

@@ -11,7 +11,7 @@ public:
   ~RendererClient();
 
 private:
-  virtual void RenderViewCreated(content::RenderView*) OVERRIDE;
+  void RenderViewCreated(content::RenderView*) override;
 
   DISALLOW_COPY_AND_ASSIGN(RendererClient);
 };

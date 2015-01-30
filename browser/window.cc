@@ -19,7 +19,7 @@ Window::~Window() {
 
 void Window::WindowReady() {
   auto web_contents = inspectable_web_contents_->GetWebContents();
-  web_contents->GetController().LoadURL(GURL("http://adam.roben.org/brightray_example/start.html"), content::Referrer(), content::PAGE_TRANSITION_AUTO_TOPLEVEL, std::string());
+  web_contents->GetController().LoadURL(GURL("http://adam.roben.org/brightray_example/start.html"), content::Referrer(), ui::PAGE_TRANSITION_AUTO_TOPLEVEL, std::string());
   web_contents->SetInitialFocus();
 }
 

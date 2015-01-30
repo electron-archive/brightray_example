@@ -11,8 +11,8 @@ public:
   ~MainDelegate();
 
 private:
-  virtual content::ContentBrowserClient* CreateContentBrowserClient() OVERRIDE;
-  virtual content::ContentRendererClient* CreateContentRendererClient() OVERRIDE;
+  content::ContentBrowserClient* CreateContentBrowserClient() override;
+  content::ContentRendererClient* CreateContentRendererClient() override;
 
   scoped_ptr<content::ContentBrowserClient> browser_client_;
   scoped_ptr<content::ContentRendererClient> renderer_client_;

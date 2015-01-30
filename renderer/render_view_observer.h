@@ -11,7 +11,7 @@ public:
 private:
   ~RenderViewObserver();
 
-  virtual void DidClearWindowObject(blink::WebLocalFrame* frame) OVERRIDE;
+  void DidClearWindowObject(blink::WebLocalFrame* frame) override;
 };
 
 }
