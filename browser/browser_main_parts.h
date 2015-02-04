@@ -11,7 +11,7 @@ public:
   ~BrowserMainParts();
 
 protected:
-  virtual void PreMainMessageLoopRun() OVERRIDE;
+  void PreMainMessageLoopRun() override;
 
   DISALLOW_COPY_AND_ASSIGN(BrowserMainParts);
 };

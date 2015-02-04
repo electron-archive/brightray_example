@@ -11,7 +11,7 @@ public:
   ~BrowserClient();
 
 private:
-  virtual brightray::BrowserMainParts* OverrideCreateBrowserMainParts(const content::MainFunctionParams&) OVERRIDE;
+  brightray::BrowserMainParts* OverrideCreateBrowserMainParts(const content::MainFunctionParams&) override;
 
   DISALLOW_COPY_AND_ASSIGN(BrowserClient);
 };
