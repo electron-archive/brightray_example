@@ -1,7 +1,7 @@
 # Brightray Example
 
 This is an example app that uses
-[Brightray](https://github.com/brightray/brightray).
+[Brightray](https://github.com/atom/brightray).
 
 ## Development
 
