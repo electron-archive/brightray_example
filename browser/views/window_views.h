@@ -14,7 +14,7 @@ class WindowViews : public Window {
   WindowViews(brightray::BrowserContext*);
   ~WindowViews();
 
-  virtual void Show() OVERRIDE;
+  void Show() override;
 
  private:
   views::Widget* widget_;

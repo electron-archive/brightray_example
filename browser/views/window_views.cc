@@ -22,15 +22,15 @@ class WidgetDelegateView : public views::WidgetDelegateView {
   ~WidgetDelegateView() {
   }
 
-  virtual void DeleteDelegate() OVERRIDE { delete this; }
-  virtual views::View* GetContentsView() OVERRIDE { return this; }
-  virtual bool CanResize() const OVERRIDE { return true; }
-  virtual bool CanMaximize() const OVERRIDE { return true; }
-  virtual base::string16 GetWindowTitle() const OVERRIDE {
+  void DeleteDelegate() override { delete this; }
+  views::View* GetContentsView() override { return this; }
+  bool CanResize() const override { return true; }
+  bool CanMaximize() const override { return true; }
+  base::string16 GetWindowTitle() const override {
     return base::ASCIIToUTF16("Brightray Example");
   }
-  virtual gfx::Size GetPreferredSize() const OVERRIDE { return gfx::Size(800, 600); }
-  virtual gfx::Size GetMinimumSize() const OVERRIDE { return gfx::Size(100, 100); }
+  gfx::Size GetPreferredSize() const override { return gfx::Size(800, 600); }
+  gfx::Size GetMinimumSize() const override { return gfx::Size(100, 100); }
 
  private:
   scoped_ptr<WindowViews> window_;
